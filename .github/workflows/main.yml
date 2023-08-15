@@ -1,0 +1,79 @@
+name: HackBrowserDataManual build
+
+on:
+#   push:
+  workflow_dispatch:
+
+jobs:
+
+  linuxbuild:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3.5.3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4.1.0
+      with:
+        go-version: 1.20
+    - name: linux Build
+      run: |
+        go mod tidy
+        go build -o HackBrowserDataManual -v main.go
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        # Artifact name
+        name: # optional, default is artifact
+          HackBrowserDataManual
+        # A file, directory or wildcard pattern that describes what to upload
+        path: 
+          ./HackBrowserDataManual
+        # The desired behavior if no files are found using the provided path.
+
+  macbuild:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v3.5.3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4.1.0
+      with:
+        go-version: 1.20
+    - name: mac Build
+      run: |
+        go mod tidy
+        go build -o HackBrowserDataManual_darwin -v main.go
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        # Artifact name
+        name: # optional, default is artifact
+          HackBrowserDataManual_darwin
+        # A file, directory or wildcard pattern that describes what to upload
+        path: 
+          ./HackBrowserDataManual_darwin
+        # The desired behavior if no files are found using the provided path.
+
+  winbuild:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3.5.3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4.1.0
+      with:
+        go-version: 1.20
+    - name: Windows Build
+      run: |
+        go mod tidy
+        go build -o HackBrowserDataManual.exe -v main.go
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        # Artifact name
+        name: # optional, default is artifact
+          HackBrowserDataManual.exe
+        # A file, directory or wildcard pattern that describes what to upload
+        path: 
+          ./HackBrowserDataManual.exe
+        # The desired behavior if no files are found using the provided path.
