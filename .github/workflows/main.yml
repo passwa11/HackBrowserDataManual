@@ -71,7 +71,7 @@ jobs:
         go-version: 1.21.0
     - name: Set up CGO
       run: |
-        export CGO_ENABLED=1
+        set CGO_ENABLED=1
     - name: Windows Build
       run: |
         go mod tidy
